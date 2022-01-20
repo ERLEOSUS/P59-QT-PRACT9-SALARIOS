@@ -198,14 +198,7 @@
        <item row="1" column="1">
         <widget class="QWidget" name="widget_5" native="true">
          <layout class="QGridLayout" name="gridLayout">
-          <item row="0" column="0">
-           <widget class="QLabel" name="label_3">
-            <property name="text">
-             <string>Salario Bruto</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
+          <item row="1" column="1">
            <widget class="QLineEdit" name="outTotalSalarioB">
             <property name="text">
              <string>0</string>
@@ -215,14 +208,38 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="0">
+          <item row="2" column="0">
            <widget class="QLabel" name="label_4">
             <property name="text">
              <string>IESS</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="1">
+          <item row="3" column="1">
+           <widget class="QLineEdit" name="outTotalSalarioN">
+            <property name="text">
+             <string>0</string>
+            </property>
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string>Salario Bruto</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="label_5">
+            <property name="text">
+             <string>Salario Neto</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
            <widget class="QLineEdit" name="outTotalIESS">
             <property name="text">
              <string>0</string>
@@ -232,20 +249,10 @@
             </property>
            </widget>
           </item>
-          <item row="2" column="0">
-           <widget class="QLabel" name="label_5">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_6">
             <property name="text">
-             <string>Salario Neto</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <widget class="QLineEdit" name="outTotalSalarioN">
-            <property name="text">
-             <string>0</string>
-            </property>
-            <property name="readOnly">
-             <bool>true</bool>
+             <string>TOTALES:</string>
             </property>
            </widget>
           </item>
