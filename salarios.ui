@@ -14,8 +14,8 @@
    <string>Salarios</string>
   </property>
   <property name="windowIcon">
-   <iconset>
-    <normaloff>../PRACTICA 9/P59-Qt-Salarios-main/recursos/salary.png</normaloff>../PRACTICA 9/P59-Qt-Salarios-main/recursos/salary.png</iconset>
+   <iconset resource="recursos.qrc">
+    <normaloff>:/recursos/salary.png</normaloff>:/recursos/salary.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -334,6 +334,8 @@
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="recursos.qrc"/>
+ </resources>
  <connections/>
 </ui>
