@@ -1,5 +1,6 @@
 #include "salarios.h"
 #include "ui_salarios.h"
+#include <cstdlib>
 
 Salarios::Salarios(QWidget *parent)
     : QMainWindow(parent)
@@ -43,7 +44,10 @@ void Salarios::guardar()
         // Crear un 'stream' de texto
         QTextStream salida(&archivo);
         // Enviar los datos del resultado a la salida
-        salida << ui->outResultado->toPlainText();
+        salida << ui->outResultado->toPlainText()+"*\n"
+                  +"Total Salario Bruto: *"+QString::number(m_controlador->m_totalsalarioBruto,'f',2)+"*\n"+
+                  "Total Salario Neto: *"+QString::number(m_controlador->m_totalsalarioNeto,'f',2)+"*\n"+
+                  "Total IESS: *"+QString::number(m_controlador->m_totalIESS,'f',2)+"*\n";
         // Mostrar 5 segundo que todo fue bien
         ui->statusbar->showMessage("Datos almacenados en " + nombreArchivo, 5000);
     }else {
@@ -73,9 +77,16 @@ void Salarios::abrir()
         QTextStream entrada(&archivo);
         // Leer todo el contenido del archivo
         QString datos = entrada.readAll();
+        auto totales=datos.split("*");
         // Cargar el contenido al área de texto
         ui->outResultado->clear();
-        ui->outResultado->setPlainText(datos);
+        ui->outResultado->setPlainText(totales[0]);
+        ui->outTotalSalarioB->setText(totales[2]);
+        m_controlador->m_totalsalarioBruto=totales[2].toFloat();
+        ui->outTotalSalarioN->setText(totales[4]);
+        m_controlador->m_totalsalarioNeto=totales[4].toFloat();
+        ui->outTotalIESS->setText(totales[6]);
+        m_controlador->m_totalIESS=totales[6].toFloat();
         // Mostrar 5 segundo que todo fue bien
         ui->statusbar->showMessage("Datos leidos desde " + nombreArchivo, 5000);
     }else {
@@ -110,12 +121,6 @@ void Salarios::calcular()
 
     // Validar datos correctos
     if (nombre == "" || horas == 0){
-        /*
-        QMessageBox msgBox;
-        msgBox.setText("El nombre o el número de horas está vacío");
-        msgBox.setIcon(QMessageBox::Warning);
-        msgBox.exec();
-        */
         QMessageBox::warning(this,"Advertencia","El nombre o el número de horas está vacío");
         return;
     }
@@ -126,10 +131,14 @@ void Salarios::calcular()
     if (m_controlador->calcularSalario()){
         // muestra los resultados de los calculos del obrero
         ui->outResultado->appendPlainText(m_controlador->obrero()->toString());
+        ui->outTotalSalarioN->setText(QString::number(m_controlador->m_totalsalarioNeto,'f',2));
+        ui->outTotalSalarioB->setText(QString::number(m_controlador->m_totalsalarioBruto,'f',2));
+        ui->outTotalIESS->setText(QString::number(m_controlador->m_totalIESS,'f',2));
         // limpiar la interfaz
         limpiar();
         // Mostrar mensaje por 5 segundos en la barra de estado
         ui->statusbar->showMessage("calculos procesados para " + nombre, 5000);
+
     }else {
         QMessageBox::critical(
                     this,
@@ -149,6 +158,12 @@ void Salarios::on_actionNuevo_triggered()
 {
     limpiar();
     ui->outResultado->clear();
+    ui->outTotalSalarioB->setText("0");
+    ui->outTotalSalarioN->setText("0");
+    ui->outTotalIESS->setText("0");
+    m_controlador->m_totalsalarioBruto=0;
+    m_controlador->m_totalsalarioNeto=0;
+    m_controlador->m_totalIESS=0;
 }
 
 

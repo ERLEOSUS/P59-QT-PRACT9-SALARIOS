@@ -20,6 +20,9 @@ public:
     bool agregarObrero(QString nombre, int horas, TipoJornada jornada);
     bool calcularSalario();
     Obrero *obrero() const;
+    float m_totalsalarioBruto;
+    float m_totalIESS;
+    float m_totalsalarioNeto;
 
 signals:
 
